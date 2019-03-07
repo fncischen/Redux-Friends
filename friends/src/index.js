@@ -5,8 +5,23 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 import { Provider } from 'react-redux'; 
+import { createStore } from 'redux';
+import { friendsReducer } from "./reducers";
 
-import { Reducer } from "./reducers";
+import thunk from 'redux-thunk';
+// thunk from redux-thunk
+
+import logger from 'redux-logger';
+// logger from redux-logger
+
+import { applyMiddleware} from 'redux';
+// applyMiddleware from redux
+
+const store = createStore(
+    friendsReducer,
+    applyMiddleware(thunk, logger),
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+)
 
 
 ReactDOM.render(<App />, document.getElementById('root'));
