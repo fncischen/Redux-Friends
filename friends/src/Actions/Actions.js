@@ -9,7 +9,8 @@ export const ADD_FRIEND = "ADD_FRIEND";
 
 // two seperate action generators
 
-export function authorizeSignin() {
+// configure authorization of sign in. // intermediate step
+function authorizeSignin() {
     const token = localStorage.getItem('userToken');
 
     return axios.create({
@@ -20,5 +21,44 @@ export function authorizeSignin() {
     });
 };
 
+// an action for signing in // which we use to return a token 
+// that we then use for logging in 
+export const login = (username, password) => {
+    axios.put("/api/login", {username, password})
+        .then(res => {token: res.data.payload})
+        .catch(err => console.log(err));
+}
 
-// generate 
+// use the token that has been set by 
+export const fetchFriends = (token) => {
+
+}
+
+export const addedFriends = (an_addedFriend) => {
+
+    axios.put("/api/friends", {
+        name: an_addedFriend.name,
+        age: an_addedFriend.age,
+        email: an_addedFriend.email
+    })
+    .then(res => {friends: res})
+    .catch(err => console.log(err))
+}
+
+export const deletedFriends = (id) => {
+
+    axios.delete(`/api/friends:${id}`)
+        .then(res => {friends: res})
+        .catch( err => console.log(err));
+
+}
+
+export const updateFriend = (id) => {
+
+    axios.put(`/api/friends:${id}`, {       
+        age: an_addedFriend.age,
+        email: an_addedFriend.email})
+        .then(res => {friends: res})
+        .catch(err => console.log(err));
+
+}

@@ -5,23 +5,23 @@ const initialState = {
     fetchingFriends: false,
     friends: [],
     loggingIn: false,
-    savingFriends: false,
+    addedFriend: false,
     updatingFriend: false,
     error: null
 };
 
 export default friendsReducer = (state = initialState, action) => {
     switch(action.type){
-        case SIGN_IN:
-            return {}
-        case SIGN_OUT:
-            return {}
         case FETCHING_DATA:
-            return {}
+            return {... state, fetchingFriends: true, error: null}
+        case SIGN_IN:
+            return {... state, friends: action.friends, loggingIn: true}
+        case SIGN_OUT:
+            return {... state, loggingIn: false}
         case DELETE_FRIEND:
-            return {}
+            return {... state, friends: action.friends}
         case ADD_FRIEND:
-            return {}
+            return {... state, friends: action.friends}
         default:
             return state; 
     }
