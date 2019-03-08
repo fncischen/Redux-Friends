@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { Link } from 'react-router-dom'
+
+
+import {Login, Loading, Public} from "./Components";
+import {PrivateRoute, ProtectedRoute} from "./Router";
 
 class App extends Component {
   render() {
@@ -10,18 +15,22 @@ class App extends Component {
 
         <ul>
             <li>
-              <Link to="/public">Public Page</Link>
+              <Link to="/">Public Page</Link>
             </li>
+
             <li>
-              <Link to="/protected">Protected Page</Link>
+              <Link to="/login">LogIn</Link>
+            </li>
+
+            <li>
+              <Link to="/friends">Friends Page</Link>
             </li>
         </ul>
         
         <Route path="/" component={Public}/>
         <Route path="/login" component={Login}/>
         
-        <PrivateRoute path='/private' component={Loading} />
-        <ProtectedRoute path='/friends' component={FriendsList} />
+        <PrivateRoute path='/friends' component={ProtectedRoute} />
       </div>
     );
   }

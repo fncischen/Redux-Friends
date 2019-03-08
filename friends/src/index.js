@@ -18,12 +18,6 @@ import { applyMiddleware} from 'redux';
 import { SIGN_IN } from './Actions/Actions';
 // applyMiddleware from redux
 
-const store = createStore(
-    friendsReducer,
-    applyMiddleware(loggingInMiddleWare, thunk, logger),
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-)
-
 // note // use the action login that is sent out to 
 // retrive the token :)
 const loggingInMiddleware = store => next => action => {
@@ -32,6 +26,14 @@ const loggingInMiddleware = store => next => action => {
     }
     next(action);
 };
+
+const store = createStore(
+    friendsReducer,
+    applyMiddleware(loggingInMiddleWare, thunk, logger),
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+)
+
+
 
 
 ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
