@@ -15,6 +15,7 @@ import logger from 'redux-logger';
 // logger from redux-logger
 
 import { applyMiddleware} from 'redux';
+import { SIGN_IN } from './Actions/Actions';
 // applyMiddleware from redux
 
 const store = createStore(
@@ -23,8 +24,15 @@ const store = createStore(
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 )
 
+const loggingInMiddleware = store => next => action => {
+    if(action.type = SIGN_IN) {
+        localStorage.setItem('userToken', action.payload.token);
+    }
+    next(action);
+};
 
-ReactDOM.render(<App />, document.getElementById('root'));
+
+ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

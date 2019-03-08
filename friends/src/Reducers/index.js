@@ -1,7 +1,13 @@
 import {} from "../actions";
 
 const initialState = {
-
+    deletingFriend: false,
+    fetchingFriends: false,
+    friends: [],
+    loggingIn: false,
+    savingFriends: false,
+    updatingFriend: false,
+    error: null
 };
 
 export default friendsReducer = (state = initialState, action) => {
