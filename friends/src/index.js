@@ -24,9 +24,11 @@ const store = createStore(
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 )
 
+// note // use the action login that is sent out to 
+// retrive the token :)
 const loggingInMiddleware = store => next => action => {
     if(action.type = SIGN_IN) {
-        localStorage.setItem('userToken', action.payload.token);
+        localStorage.setItem('userToken', action.token);
     }
     next(action);
 };

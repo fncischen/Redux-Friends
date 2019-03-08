@@ -10,7 +10,10 @@ export const ADD_FRIEND = "ADD_FRIEND";
 // two seperate action generators
 
 // configure authorization of sign in. // intermediate step
-function authorizeSignin() {
+// since axios will automatically check if the authorization token 
+// equals the token in the API for each get method, we are fine :)
+
+const authorizeSignIn = () => {
     const token = localStorage.getItem('userToken');
 
     return axios.create({
@@ -29,9 +32,12 @@ export const login = (username, password) => {
         .catch(err => console.log(err));
 }
 
-// use the token that has been set by 
-export const fetchFriends = (token) => {
-
+// use the token that has been authenticated by
+// authorize signIn <--> I call this a mini action
+export const fetchFriends = {
+    authorizeSignIn().get("/api/friends")
+        .then(res => {friends: res})
+        .catch(err => console.log(err))
 }
 
 export const addedFriends = (an_addedFriend) => {
